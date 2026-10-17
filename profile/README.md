@@ -37,10 +37,10 @@ LLM이 공고문에서 추출한 조건은 **팀원이 원문과 대조해 검�
 
 | 리포 | 역할 |
 |---|---|
-| [nochila-frontend](https://github.com/nochila/nochila-frontend) | React 모바일 반응형 웹 |
-| [nochila-backend](https://github.com/nochila/nochila-backend) | REST API · 규칙 엔진 · LLM 연동 |
-| [nochila-data](https://github.com/nochila/nochila-data) | 제도 원문 수집 · LLM 추출 · 검수 완료 데이터 |
-| [nochila-docs](https://github.com/nochila/nochila-docs) | 요구사항 · API 명세 · 설계 결정 기록 |
+| [nochila-frontend](https://github.com/nochila/nochilla-frontend) | React 모바일 반응형 웹 |
+| [nochila-backend](https://github.com/nochila/nochilla-backend) | REST API · 규칙 엔진 · LLM 연동 |
+| [nochila-data](https://github.com/nochila/nochilla-data) | 제도 원문 수집 · LLM 추출 · 검수 완료 데이터 |
+| [nochila-docs](https://github.com/nochila/nochilla-docs) | 요구사항 · API 명세 · 설계 결정 기록 |
 
 ## 기술 스택
 
