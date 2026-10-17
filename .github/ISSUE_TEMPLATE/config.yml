@@ -4,5 +4,5 @@ contact_links:
     url: https://app.notion.com/
     about: 기획 변경, 일정 조정, 회의 안건은 노션에서 논의합니다.
   - name: 제도 데이터 문의
-    url: https://github.com/nochila/nochila-data/issues/new
+    url: https://github.com/nochilla/nochilla-data/issues/new
     about: 지원 제도 내용·자격 조건·공식 출처 관련 이슈는 데이터 리포로 올려 주세요.
