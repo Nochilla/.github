@@ -1,0 +1,52 @@
+name: 기능 개발
+description: 새 기능이나 화면을 구현합니다.
+title: "[FEAT] "
+labels: ["feature"]
+body:
+  - type: input
+    id: feature-id
+    attributes:
+      label: 기능 ID
+      description: 요구사항 정의서의 기능 ID가 있으면 적어 주세요. (F01~F08)
+      placeholder: F03
+  - type: textarea
+    id: summary
+    attributes:
+      label: 무엇을 만드나요
+      placeholder: 사용자 정보와 제도별 자격 조건을 비교해 3분류 결과를 반환하는 API를 만듭니다.
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: 완료 기준
+      description: 무엇이 되면 이 이슈를 닫을 수 있는지 체크리스트로 적어 주세요.
+      value: |
+        - [ ] 
+        - [ ] 
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: 영역
+      options:
+        - 프론트엔드
+        - 백엔드 API
+        - 규칙 엔진
+        - LLM 연동
+        - DB / 데이터
+        - 인프라 / 배포
+    validations:
+      required: true
+  - type: input
+    id: due
+    attributes:
+      label: 마감일
+      description: 개발 일정의 주차 마감일에 맞춰 주세요.
+      placeholder: 2026-11-01
+  - type: textarea
+    id: notes
+    attributes:
+      label: 참고 사항
+      description: 관련 Figma 링크, API 명세, 의존하는 다른 이슈 등
