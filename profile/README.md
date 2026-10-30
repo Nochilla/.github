@@ -44,7 +44,7 @@ MIXIT은 사진 한 장으로 레시피를 만들고, 직접 먹어 본 후기�
 
 ## 기술 스택
 
-`React` `TypeScript` `FastAPI` `MySQL` `생성형 AI API` `AWS`
+`React` `TypeScript` `FastAPI` `PostgreSQL` `생성형 AI API` `AWS`
 
 ## 팀
 
