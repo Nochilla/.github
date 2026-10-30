@@ -14,9 +14,9 @@ body:
     attributes:
       label: 재현 방법
       value: |
-        1. 
-        2. 
-        3. 
+        1.
+        2.
+        3.
     validations:
       required: true
   - type: textarea
@@ -30,8 +30,8 @@ body:
     attributes:
       label: 심각도
       options:
-        - 치명 - 잘못된 자격 판정 결과가 사용자에게 표시됨
-        - 높음 - 핵심 기능이 동작하지 않음
+        - 치명 - 개인정보 노출, 남의 데이터 수정 가능, 인증 우회
+        - 높음 - 핵심 기능(가입·AI 생성·저장·리뷰)이 동작하지 않음
         - 보통 - 불편하지만 우회할 수 있음
         - 낮음 - 표시 오류, 오타
     validations:

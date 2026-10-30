@@ -1,6 +1,6 @@
 # .github
 
-놓칠라(nochilla) 조직의 공통 설정 리포입니다.
+MIXIT 팀(GitHub 조직 `Nochilla`)의 공통 설정 리포입니다.
 
 | 경로 | 내용 |
 |---|---|
@@ -8,6 +8,8 @@
 | `.github/ISSUE_TEMPLATE/` | 모든 리포 공통 이슈 템플릿 |
 | `.github/PULL_REQUEST_TEMPLATE.md` | 모든 리포 공통 PR 템플릿 |
 | `.github/CONTRIBUTING.md` | 브랜치·커밋·PR·보안 규칙 (규칙 원문) |
+
+| `archive/nochilla/` | 이전 프로젝트 놓칠라 당시의 소개·규칙·템플릿 보관본 (GitHub 이 읽지 않음) |
 
 각 리포에 같은 이름의 파일이 있으면 그쪽이 우선합니다.
 
@@ -56,9 +58,9 @@ fix/*
 
 | 좋은 예 | 나쁜 예 | 이유 |
 |---|---|---|
-| `feature/user-input-form` | `feature/작업` | 뭘 하는 브랜치인지 모릅니다 |
-| `fix/age-boundary` | `test`, `my-branch`, `sujin` | 사람 이름이 아니라 작업 이름을 씁니다 |
-| `feature/policy-list-api` | `feature/fix-everything` | 한 브랜치는 한 가지만 합니다 |
+| `feature/recipe-generate` | `feature/작업` | 뭘 하는 브랜치인지 모릅니다 |
+| `fix/review-rating-range` | `test`, `my-branch`, `sujin` | 사람 이름이 아니라 작업 이름을 씁니다 |
+| `feature/saved-recipe-api` | `feature/fix-everything` | 한 브랜치는 한 가지만 합니다 |
 
 ## 2. 하루 작업 흐름
 
@@ -77,7 +79,7 @@ GitHub 리포 → Issues → New issue → 템플릿 선택.
 ```bash
 git switch develop      # develop 으로 이동
 git pull                # 남들이 올린 최신 코드 받기
-git switch -c feature/user-input-form   # 새 브랜치 만들고 이동
+git switch -c feature/recipe-generate   # 새 브랜치 만들고 이동
 ```
 
 `git pull` 을 빼먹으면 **오래된 코드 위에서 작업**하게 되어 나중에 충돌이 납니다.
@@ -87,8 +89,8 @@ git switch -c feature/user-input-form   # 새 브랜치 만들고 이동
 
 ```bash
 git status              # 지금 뭐가 바뀌었는지 확인 (항상 먼저)
-git add src/pages/InputForm.jsx     # 올릴 파일만 지정
-git commit -m "feat: 사용자 정보 입력 폼 화면 추가"
+git add src/pages/RecipeGenerate.tsx     # 올릴 파일만 지정
+git commit -m "feat: 사진 업로드 후 재료 확인 화면 추가"
 ```
 
 `git add .` 는 바뀐 걸 전부 담습니다. 편하지만 `.env` 같은 걸 같이 올리기 쉽습니다.
@@ -100,7 +102,7 @@ git commit -m "feat: 사용자 정보 입력 폼 화면 추가"
 ### 4) GitHub 로 올립니다
 
 ```bash
-git push -u origin feature/user-input-form   # 그 브랜치의 첫 push
+git push -u origin feature/recipe-generate   # 그 브랜치의 첫 push
 git push                                     # 두 번째부터는 이것만
 ```
 
@@ -121,7 +123,7 @@ GitHub 에 가면 노란 띠로 "Compare & pull request" 버튼이 보입니다.
 ```bash
 # 고치고
 git add .
-git commit -m "fix: 리뷰 반영 - 생년월일 입력 검증 추가"
+git commit -m "fix: 리뷰 반영 - 이미지 크기 검증 추가"
 git push
 ```
 
@@ -135,7 +137,7 @@ git push
 ```bash
 git switch develop
 git pull                # 내 작업이 합쳐진 develop 받기
-git branch -d feature/user-input-form    # 내 컴퓨터의 브랜치도 삭제
+git branch -d feature/recipe-generate    # 내 컴퓨터의 브랜치도 삭제
 ```
 
 ## 3. 커밋 메시지 규칙
@@ -155,7 +157,7 @@ git branch -d feature/user-input-form    # 내 컴퓨터의 브랜치도 삭제
 | `docs` | 문서 |
 | `test` | 테스트 |
 | `chore` | 설정, 패키지, 빌드 |
-| `data` | 제도 데이터 추가·검수 |
+| `data` | 재료·상품 사전, 시드 레시피 추가·수정 |
 
 **쓰는 법**
 
@@ -165,11 +167,11 @@ git branch -d feature/user-input-form    # 내 컴퓨터의 브랜치도 삭제
 
 | 좋은 예 | 나쁜 예 | 이유 |
 |---|---|---|
-| `feat: 연령·거주 조건 비교 규칙 구현` | `수정` | 뭘 수정했는지 알 수 없습니다 |
-| `fix: 만 34세 경계값이 미충족으로 판정되던 문제 수정` | `fix bug` | 어떤 버그인지 알 수 없습니다 |
-| `data: 성남시 청년 제도 3건 검수 완료` | `asdf`, `ㅁㄴㅇㄹ` | 나중에 이력을 못 찾습니다 |
-| `chore: ruff 설정 추가` | `matcher.py 변경` | 파일 이름이 아니라 한 일을 씁니다 |
-| `docs: API 명세에 /explain 추가` | `feat: 전체 작업` | 한 커밋은 한 가지만 담습니다 |
+| `feat: 저장·평점 기반 인기 랭킹 API 구현` | `수정` | 뭘 수정했는지 알 수 없습니다 |
+| `fix: 인증 전 계정이 레시피를 저장할 수 있던 문제 수정` | `fix bug` | 어떤 버그인지 알 수 없습니다 |
+| `data: 편의점 라면류 상품 20건 재료 사전에 추가` | `asdf`, `ㅁㄴㅇㄹ` | 나중에 이력을 못 찾습니다 |
+| `chore: eslint 설정 추가` | `recipe.ts 변경` | 파일 이름이 아니라 한 일을 씁니다 |
+| `docs: API 명세에 /reviews 추가` | `feat: 전체 작업` | 한 커밋은 한 가지만 담습니다 |
 
 커밋 메시지는 3주 뒤의 자신과 팀원이 읽습니다. 그때 이해할 수 있게 씁니다.
 
@@ -199,20 +201,20 @@ git push
 
 ```
 <<<<<<< HEAD
-const MAX_AGE = 34;
+const MAX_IMAGE_MB = 5;
 =======
-const MAX_AGE = 39;
+const MAX_IMAGE_MB = 10;
 >>>>>>> develop
 ```
 
 위쪽이 내 코드, 아래쪽이 받아온 코드입니다.
 **둘 중 뭐가 맞는지 판단해서** 남길 코드만 두고 `<<<<<<<`, `=======`, `>>>>>>>` 세 줄을 지웁니다.
-판단이 안 서면 **지우지 말고 상대방에게 물어보세요.** 특히 자격 판정 기준값은 혼자 결정하지 않습니다.
+판단이 안 서면 **지우지 말고 상대방에게 물어보세요.** 특히 랭킹·추천 기준값과 AI 프롬프트는 혼자 결정하지 않습니다.
 
 정리한 뒤:
 
 ```bash
-git add 충돌난파일.jsx
+git add 충돌난파일.tsx
 git commit -m "chore: develop 병합 충돌 해결"
 git push
 ```
@@ -222,7 +224,7 @@ git push
 커밋 전이라면 그대로 브랜치를 만들면 됩니다. 변경 사항이 따라옵니다.
 
 ```bash
-git switch -c feature/user-input-form
+git switch -c feature/recipe-generate
 ```
 
 ### 커밋 메시지를 잘못 썼습니다
@@ -248,10 +250,11 @@ git commit --amend -m "feat: 올바른 메시지"
 ## 5. 절대 커밋하면 안 되는 것
 
 - `.env` 파일
-- LLM API 키 (Claude / Gemini)
-- DB 접속 정보, RDS 비밀번호
+- 생성형 AI API 키
+- DB 접속 정보, MySQL 비밀번호
+- 이메일 발송 계정(SMTP) 비밀번호, JWT·세션 시크릿
 - AWS 액세스 키, `.pem` 키 파일
-- 실제 사용자의 개인정보
+- 실제 사용자의 이메일·프로필 사진 등 개인정보
 
 새 설정값이 필요하면 `.env.example` 에 **키 이름만** 추가하고, 값은 팀 채널로 공유합니다.
 

@@ -1,11 +1,11 @@
 <div align="center">
 
-# 놓칠라 (Nochilla)
+# MIXIT (믹스잇)
 
-**받을 수 있는 혜택, 놓치지 않게.**
+**리뷰가 쌓일수록, 취향에 가까워지다.**
 
-성남시와 경기도의 지원 제도를 AI가 분석하고,
-사용자의 조건에 맞는 혜택과 신청 서류 및 기간을 안내하는 AI 기반 웹 서비스
+편의점 상품과 식재료 사진을 올리면 AI가 레시피를 제안하고,
+직접 만들어 먹은 사람들의 후기로 나에게 맞는 조합을 추천하는 AI 기반 레시피 커뮤니티
 
 </div>
 
@@ -13,42 +13,65 @@
 
 ## 무엇을 하는 서비스인가요
 
-지원 제도가 없어서가 아니라, **자기가 받을 수 있는지 알기 어렵기 때문에** 주민이 혜택을 놓칩니다.
-놓칠라는 연령·거주 기간·가구 형태·직업·소득 구간을 한 번 입력받아,
-제도별 자격 조건과 비교한 뒤 신청 서류와 기간까지 안내합니다.
+AI 레시피 생성만으로는 맛을 알 수 없습니다. **실제로 만들어 먹은 사람의 경험**이 있어야 합니다.
+MIXIT은 사진 한 장으로 레시피를 만들고, 직접 먹어 본 후기를 쉽게 남기게 하고,
+쌓인 저장·평가·리뷰를 바탕으로 사용자마다 다른 취향에 맞는 조합을 추천합니다.
 
 | 단계 | 사용자가 하는 일 | 시스템이 하는 일 |
 |---|---|---|
-| 1 | 상황 입력 | 입력값 검증 |
-| 2 | 대기 | 제도별 자격 조건 비교 (규칙 엔진) |
-| 3 | 결과 확인 | 조건 충족 / 확인 필요 / 미충족 3분류 |
-| 4 | 신청 준비 | 필요 서류·기간·담당 기관·공식 출처 제공 |
+| 1 | 재료·상품 사진 업로드 | 이미지 검증, AI가 재료 후보 인식 |
+| 2 | 인식된 재료 확인·수정 | 확정된 재료로 레시피 생성 (재료·순서·시간·난이도) |
+| 3 | AI와 대화하며 레시피 조정 | 대화 기록과 레시피를 계정에 저장 |
+| 4 | 만들어 먹고 리뷰 작성 | AI 대화 기록에서 재료·레시피를 불러와 리뷰 입력란 자동 채움 |
+| 5 | 홈에서 랭킹·추천 확인 | 저장·평점·리뷰로 인기 랭킹과 개인화 추천 + 추천 이유 제공 |
 
 ## 핵심 설계 원칙
 
-1. **AI는 읽고 설명만 합니다.** 자격 판정은 명시적인 규칙 코드가 합니다.
-2. **모든 결과에 공식 출처와 확인일을 붙입니다.**
-3. **불확실하면 "받을 수 있음"이 아니라 "확인 필요"로 분류합니다.**
-
-LLM이 공고문에서 추출한 조건은 **팀원이 원문과 대조해 검수한 뒤에만** DB에 저장되고,
-검수가 완료된 데이터만 자격 판정에 사용됩니다.
+1. **AI 생성 레시피와 실제 시식 리뷰를 구분해 표시합니다.** 리뷰 없는 레시피를 검증된 것처럼 보여 주지 않습니다.
+2. **AI가 인식·추출한 정보는 사용자가 확인하고 수정한 뒤에만 저장됩니다.**
+3. **추천은 규칙 기반 취향 분석으로 후보를 고르고, AI는 분석과 추천 이유 설명에 씁니다.**
+   리뷰가 AI 모델을 재학습시키지 않으며, MIXIT DB에 쌓인 데이터만 추천에 활용합니다.
+4. **이메일 인증을 마친 회원만 핵심 기능을 씁니다.** 실명 대신 닉네임, 이메일은 공개하지 않습니다.
 
 ## 리포지토리
 
 | 리포 | 역할 |
 |---|---|
-| [nochilla-frontend](https://github.com/nochilla/nochilla-frontend) | React 모바일 반응형 웹 |
-| [nochilla-backend](https://github.com/nochilla/nochilla-backend) | REST API · 규칙 엔진 · LLM 연동 |
-| [nochilla-data](https://github.com/nochilla/nochilla-data) | 제도 원문 수집 · LLM 추출 · 검수 완료 데이터 |
-| [nochilla-docs](https://github.com/nochilla/nochilla-docs) | 요구사항 · API 명세 · 설계 결정 기록 |
+| [mixit-frontend](https://github.com/Nochilla/mixit-frontend) | React · TypeScript 모바일 중심 반응형 웹 |
+| [mixit-backend](https://github.com/Nochilla/mixit-backend) | FastAPI REST API · 인증 · AI 연동 · 추천 |
+| [mixit-data](https://github.com/Nochilla/mixit-data) | 재료·상품 사전 · 시드 레시피 · 추천 분석용 데이터 |
+| [mixit-docs](https://github.com/Nochilla/mixit-docs) | 요구사항 · API 명세 · DB 설계 · 설계 결정 기록 |
 
 ## 기술 스택
 
-`React` `Nginx` `FastAPI` `PostgreSQL` `AWS EC2 / RDS` `Claude / Gemini API`
+`React` `TypeScript` `FastAPI` `MySQL` `생성형 AI API` `AWS`
 
 ## 팀
 
-5인 팀 프로젝트 · 개발 기간 2026.10.14 ~ 11.23
+5인 팀 프로젝트 · 개발 기간 2026.10.28 ~ 11.23
 
 > 본 서비스는 학습 목적의 **비공식 프로젝트**입니다.
-> 안내 내용은 참고용이며, 최종 자격은 담당 기관의 심사로 결정됩니다.
+> AI가 제안한 레시피는 맛과 안전을 보장하지 않습니다. 알레르기 재료는 직접 확인해 주세요.
+
+---
+
+<details>
+<summary><b>이전 프로젝트 · 놓칠라 (Nochilla)</b></summary>
+
+<br>
+
+**받을 수 있는 혜택, 놓치지 않게.**
+
+성남시와 경기도의 지원 제도를 AI가 분석하고, 사용자의 조건에 맞는 혜택과 신청 서류 및 기간을 안내하는 AI 기반 웹 서비스입니다.
+2026.10.28 회의에서 팀 프로젝트가 MIXIT 으로 변경되었습니다. 놓칠라 코드와 문서는 그대로 남겨 둡니다.
+
+| 리포 | 역할 |
+|---|---|
+| [nochilla-frontend](https://github.com/Nochilla/nochilla-frontend) | React 모바일 반응형 웹 |
+| [nochilla-backend](https://github.com/Nochilla/nochilla-backend) | REST API · 규칙 엔진 · LLM 연동 |
+| [nochilla-data](https://github.com/Nochilla/nochilla-data) | 제도 원문 수집 · LLM 추출 · 검수 완료 데이터 |
+| [nochilla-docs](https://github.com/Nochilla/nochilla-docs) | 요구사항 · API 명세 · 설계 결정 기록 |
+
+당시 조직 소개·규칙·템플릿 원문은 [`archive/nochilla/`](https://github.com/Nochilla/.github/tree/main/archive/nochilla) 에 있습니다.
+
+</details>

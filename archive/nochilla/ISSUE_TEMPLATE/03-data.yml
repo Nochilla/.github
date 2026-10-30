@@ -1,0 +1,50 @@
+name: 제도 데이터 작업
+description: 지원 제도를 수집하거나, 추출 결과를 검수합니다.
+title: "[DATA] "
+labels: ["data"]
+body:
+  - type: input
+    id: policy-name
+    attributes:
+      label: 제도명
+      placeholder: 성남시 청년 OO 지원
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: 공식 출처 URL
+      description: 공고문 또는 공식 안내 페이지. 출처 없는 데이터는 등록하지 않습니다.
+    validations:
+      required: true
+  - type: dropdown
+    id: stage
+    attributes:
+      label: 작업 단계
+      options:
+        - 수집 - 공고문 원문 확보
+        - 추출 - LLM으로 조건 구조화
+        - 검수 - 원문과 대조 확인
+        - 수정 - 조건·기간 변경 반영
+    validations:
+      required: true
+  - type: checkboxes
+    id: review
+    attributes:
+      label: 검수 항목
+      description: 검수 단계라면 원문과 하나씩 대조해 주세요.
+      options:
+        - label: 대상 연령 (최소·최대)
+        - label: 거주 요건 (지역·기간)
+        - label: 소득 기준
+        - label: 가구 조건
+        - label: 직업 조건
+        - label: 신청 시작일·마감일
+        - label: 신청 방법·담당 기관
+        - label: 필요 서류
+        - label: 공식 출처 URL이 살아 있음
+  - type: textarea
+    id: issues
+    attributes:
+      label: 원문과 다른 점 / 불명확한 조건
+      description: 자동 판정이 어려운 조건은 여기에 적고, 판정에서는 "확인 필요"로 처리합니다.
